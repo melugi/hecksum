@@ -176,7 +176,6 @@ class Check(BaseModel):
 
 def main():
     projects = [
-        Project(airtable_id='recU4m6YnYdQ4U76q', name='Test Failure'),
         Project(airtable_id='rec1stqERwHeVoyTr', name='Codecov Bash Uploader'),
         Project(airtable_id='recPGEEzOeJ2gNh7u', name='Transmission Mac OS X'),
         Project(airtable_id='rec6xk5CUPcjsqIyD', name='Transmission Windows x86'),
