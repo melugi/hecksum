@@ -1,5 +1,6 @@
 """
 Call with the name of a ReferenceFactory to try it out.
+$ python try_reference.py test_failure
 """
 from pprint import pprint
 import sys
