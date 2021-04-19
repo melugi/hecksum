@@ -3,6 +3,7 @@ import re
 from typing import cast, Optional
 
 from pydantic import BaseModel, constr, HttpUrl
+import requests
 
 from hecksum.functions import get_raised
 from settings import IGNORED_EXCEPTIONS
@@ -23,10 +24,11 @@ class Reference(BaseReference):
         return all(self.dict().values())
 
     def download_checksum(self) -> str:
-        # Todo: convert to streaming
         h = hashlib.new(self.algorithm)
-        r = get_raised(self.download_url)
-        h.update(r.content)
+        r = requests.get(self.download_url, stream=True)
+        r.raise_for_status()
+        for chunk in r.iter_content(1024**2):
+            h.update(chunk)
         checksum = h.hexdigest()
         return checksum
 
