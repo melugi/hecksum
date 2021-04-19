@@ -1,3 +1,4 @@
+import hashlib
 import re
 from typing import cast, Optional
 
@@ -20,6 +21,14 @@ class Reference(BaseReference):
 
     def populated(self) -> bool:
         return all(self.dict().values())
+
+    def download_checksum(self) -> str:
+        # Todo: convert to streaming
+        h = hashlib.new(self.algorithm)
+        r = get_raised(self.download_url)
+        h.update(r.content)
+        checksum = h.hexdigest()
+        return checksum
 
 
 class ReferenceFactory(BaseReference):

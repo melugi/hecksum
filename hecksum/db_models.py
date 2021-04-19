@@ -6,7 +6,6 @@ from pydantic import BaseModel, HttpUrl
 import requests
 
 from hecksum import references as refs
-from hecksum.functions import create_download_checksum
 from settings import IGNORED_EXCEPTIONS
 
 
@@ -28,7 +27,7 @@ class Project(BaseModel):
         try:
             if not ref.populated():
                 raise Exception(f'Reference not populated. {ref}')
-            download_checksum = create_download_checksum(ref.download_url, ref.algorithm)
+            download_checksum = ref.download_checksum()
         except IGNORED_EXCEPTIONS:
             status = Status.error
         else:
