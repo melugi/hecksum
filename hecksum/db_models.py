@@ -27,7 +27,7 @@ class Project(BaseModel):
         try:
             if not ref.populated():
                 raise Exception(f'Reference not populated. {ref}')
-            download_checksum = ref.download_checksum()
+            download_checksum = ref.get_download_checksum()
         except IGNORED_EXCEPTIONS:
             status = Status.error
         else:

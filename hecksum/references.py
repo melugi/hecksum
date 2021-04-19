@@ -23,7 +23,7 @@ class Reference(BaseReference):
     def populated(self) -> bool:
         return all(self.dict().values())
 
-    def download_checksum(self) -> str:
+    def get_download_checksum(self) -> str:
         h = hashlib.new(self.algorithm)
         r = requests.get(self.download_url, stream=True)
         r.raise_for_status()
